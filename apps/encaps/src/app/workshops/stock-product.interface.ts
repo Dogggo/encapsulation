@@ -1,6 +1,6 @@
-import { Product } from "./product";
+import { Product } from './product';
 
-export interface StockProduct{
-    products: Product[];
-    key: string
+export interface StockProduct {
+  products: Product[];
+  key: string;
 }

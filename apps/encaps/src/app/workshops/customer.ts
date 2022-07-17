@@ -16,16 +16,17 @@ export class Customer {
     shop: Shop,
     amount: number
   ): void {
-    if (this.wallet.haveEnoughMoney(price)) {
+    if (!this.wallet.haveEnoughMoney(price)) {
       throw new Error('There is not enough money in a wallet');
     }
 
-    if (shop.haveEnoughProductInStock(product, amount)) {
+    if (!shop.haveEnoughProductInStock(product, amount)) {
       throw new Error('There is not enough product in a stock');
     }
 
     this.wallet.withdraw(price);
-    this.products.push(product);
+
+    for (let i = 0; i < amount; i++) this.products.push(product);
   }
 
   public balance(printer: Printer): void {

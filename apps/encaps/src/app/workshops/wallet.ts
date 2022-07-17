@@ -21,6 +21,7 @@ export class Wallet {
     }
     
     public haveEnoughMoney(value: number): boolean {
+        console.log(value, this.money)
        return value <= this.money ? true : false;
     }
 

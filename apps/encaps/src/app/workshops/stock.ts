@@ -14,7 +14,7 @@ export class Stock {
     if (foundStockOfProduct === undefined) {
       return false;
     } else {
-      return foundStockOfProduct!.products.length >= amount ? true : false;
+      return foundStockOfProduct?.products.length >= amount ? true : false;
     }
   }
 
@@ -22,7 +22,7 @@ export class Stock {
     const foundProduct = product.findProductFromStock(this.products, product);
 
     if (foundProduct) {
-      const indexOfProduct = this.products.indexOf(foundProduct!);
+      const indexOfProduct = this.products.indexOf(foundProduct);
 
       for (let i = 0; i < amount; i++)
         this.products[indexOfProduct].products.pop();
@@ -40,7 +40,7 @@ export class Stock {
       this.products.push(foundStockOfProduct);
     }
 
-    const indexOfProduct = this.products.indexOf(foundStockOfProduct!);
+    const indexOfProduct = this.products.indexOf(foundStockOfProduct);
 
     for (let i = 0; i < amount; i++)
       this.products[indexOfProduct].products.push(product);

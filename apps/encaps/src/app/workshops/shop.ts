@@ -1,5 +1,6 @@
 import { Customer } from "./customer";
 import { Printer } from "./printer/printer.interface";
+import { roundToTwo } from "./roundToTwo";
 import { Product } from "./product";
 import { Stock } from "./stock";
 import { Wholesaler } from "./wholesale";
@@ -28,7 +29,7 @@ export class Shop {
     }
 
     public putMoney(money: number) {
-        this.bankMoney = this.bankMoney + money;
+        this.bankMoney = roundToTwo(this.bankMoney + money);
     }
 
     public withdrawMoney(money: number) {
@@ -39,7 +40,7 @@ export class Shop {
         return this.stock.enoughProductsInStock(amount, product) ? true : false;  
     }
 
-    public resupplyStock(wholesaler: Wholesaler, product: Product, amount: number, margin: number = 0.2) {
+    public resupplyStock(wholesaler: Wholesaler, product: Product, amount: number, margin: number = 2) {
         wholesaler.sellToShop(product, amount);
         this.withdrawMoney(product.calculatePrice(product, amount));
         product.addTaxes(margin);

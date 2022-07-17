@@ -1,12 +1,10 @@
 import { Customer } from './customer';
+import { roundToTwo } from './roundToTwo';
 import { Shop } from './shop';
 import { StockProduct } from './stock-product.interface';
 
 export class Product {
-  constructor(
-    private name: string,
-    private price: number,
-  ) {
+  constructor(private name: string, private price: number) {
     Product.assrtPriceCantBeZeroOrLess(price);
   }
 
@@ -22,11 +20,12 @@ export class Product {
     shop: Shop
   ): void {
     customer.buyFromShop(this.price, this, shop, amount);
-    shop.putMoney(this.price);
+    console.log(roundToTwo(this.price));
+    shop.putMoney(roundToTwo(this.price));
   }
 
   public addTaxes(margin: number) {
-    this.price = this.roundToTwo(this.price + (this.price * margin) / 100);
+    this.price = roundToTwo(this.price + (this.price * margin) / 100);
   }
 
   public findProductFromStock(
@@ -55,9 +54,4 @@ export class Product {
     };
     return stackProduct;
   }
-
-  private roundToTwo(value: number) {
-    return Math.round(value * 100 + Number.EPSILON) / 100;
-  }
 }
-
